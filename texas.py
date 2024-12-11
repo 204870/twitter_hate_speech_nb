@@ -12,4 +12,5 @@ label: (Class Label) class label for majority of CF users (0: 'hate-speech', 1: 
 tweet: (string)
 '''
 df.to_csv('tdata.csv')
+df['class'].to_csv('labels.csv')
 df.tweet.to_csv('tweets.csv')
