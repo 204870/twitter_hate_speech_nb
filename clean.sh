@@ -26,7 +26,9 @@ cat nolink | tr A-Z a-z >> lower
 rm nolink
 # [:punct:] might not be helpful since we want to preserve html unicode codes
 #cat tweets.txt | tr -d '[:punct:]' >> nopunc
-sed -e "s![␠!\"$%'()*+,-./:;<=>?@\[\]^_\`{|\}~]*!!g" lower >> cleaned
+sed -e "s![␠!\"$%'()*+,-./:;<=>?@\[\]^_\`{|\}~]*!!g" lower >> nopunc
+sed -e "s/[!\"]*//" nopunc >> cleaned
 rm lower
+rm nopunc
 
 rm tweets.txt
