@@ -11,13 +11,15 @@ tdata_length = df.shape[0]
 sample_size = 5000
 initdex = random.randint(0, tdata_length)
 
+df_train = pd.DataFrame(columns=df.columns)
+
 txt = 'index,class,tweet'
 for i in range(initdex, (initdex+sample_size)):
-  
+  j = i-initdex
   # ensure it can wrap depending on the starting seed
   if (i >= tdata_length):
     i = i % tdata_length
-  txt = txt + '\n' + str(i) + "," + str(df['class'].loc[i]) + "," + str(df['tweet'].loc[i])
+  df_train.loc[j] = df.loc[i]
 
 # i apparently have to make a second for loop for this part, maybe i should've done this with numpy instead of pandas
 for i in range(initdex, (initdex+sample_size)):
@@ -25,9 +27,6 @@ for i in range(initdex, (initdex+sample_size)):
     i = i % tdata_length
   df.drop(i)
 
-# write training and test data to csv
-f = open('training.csv', 'w')
-f.write(txt)
-f.close()
-
-df.to_csv('test.csv')
+# write training and test data to parquet because csv doesn't work because the tweets have commas :'(
+df_train.to_parquet('training.parquet')
+df.to_parquet('test.parquet')
