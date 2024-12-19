@@ -19,8 +19,7 @@ l = df.shape[0]
 li = df.tweet.tolist()
 f = open("tweets", "w")
 for i in li:
-  i.replace("\n", "")
-  f.write(str(i) + "\n")
+  f.write(i.replace("\n", "") + "\n")
 f.close()
 
 # also while i know that there exists a function df.to_csv()
