@@ -1,18 +1,11 @@
 #!/bin/bash
 
-#num=$(cat tweet | wc -l)
-#echo $num
+paste "labels" "cleaned" >> tdata_cleaner
 
-
-
-# align both files and then use the loop below
-
-# looks like this:                                                              
 # file1line: label
 # file2line: tweet (cleaned + normalized)                                                                              
 echo "starting loop 1!"
 while IFS=$'\t' read -r file1line file2line; do                            
-  echo $file1line,$file2line >> tdata_cleaner
   if echo $file1line | grep -q [0-1]
   then
     # potentially capture "&#[0-9]*&# and put a space between unicharacters?
@@ -23,8 +16,9 @@ while IFS=$'\t' read -r file1line file2line; do
   fi 
 done < <(paste "labels" "cleaned")   
 
+# ensure empty columns are deleted after pasting files together
 sed "s/[0-9],$//" tdata_cleaner | sort | uniq >> tdata_cleaned.csv
-rm tdata_cleaner
+#rm tdata_cleaner
 
 echo "loop 1 done!"
 
