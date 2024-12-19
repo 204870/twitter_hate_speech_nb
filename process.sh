@@ -11,9 +11,8 @@
 # file1line: label
 # file2line: tweet (cleaned + normalized)                                                                              
 echo "starting loop 1!"
-echo "class, tweet" >> tdata_cleaned.csv
 while IFS=$'\t' read -r file1line file2line; do                            
-  echo $file1line,$file2line >> tdata_cleaned.csv
+  echo $file1line,$file2line >> tdata_cleaner
   if echo $file1line | grep -q [0-1]
   then
     # potentially capture "&#[0-9]*&# and put a space between unicharacters?
@@ -23,6 +22,10 @@ while IFS=$'\t' read -r file1line file2line; do
     # make csv-like
   fi 
 done < <(paste "labels" "cleaned")   
+
+sed "s/[0-9],$//" tdata_cleaner >> tdata_cleaned.csv
+rm tdata_cleaner
+
 echo "loop 1 done!"
 
 cat types_temp | sort >> types
@@ -41,4 +44,5 @@ done < tokens_alpha
 cat orderer | sort -n -r >> ordered
 rm orderer
 echo "ordered list!"
+
 # you can also echo type/token ratio too :)
