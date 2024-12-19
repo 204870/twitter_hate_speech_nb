@@ -11,6 +11,7 @@
 # file1line: label
 # file2line: tweet (cleaned + normalized)                                                                              
 echo "starting loop 1!"
+echo "class, tweet" >> tdata_cleaned.csv
 while IFS=$'\t' read -r file1line file2line; do                            
   echo $file1line,$file2line >> tdata_cleaned.csv
   if echo $file1line | grep -q [0-1]
