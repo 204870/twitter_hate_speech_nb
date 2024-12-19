@@ -17,10 +17,17 @@ tweet: (string)
 # some tweets have newline chars in them :')
 l = df.shape[0]
 li = df.tweet.tolist()
-for i in range(0,l):
-  li[i].replace("\n", "")
-df.tweet = li
+f = open("tweets", "w")
+for i in li:
+  i.replace("\n", "")
+  f.write(str(i) + "\n")
+f.close()
 
-df.to_csv('tdata.csv')
-df.tweet.to_csv('tweets.csv')
-df['class'].to_csv('labels.csv')
+# also while i know that there exists a function df.to_csv()
+# i have decided not to use it because it was giving me several problems
+# all of them i have traced back to the use of this function
+cl = df['class'].tolist()
+f = open("labels", "w")
+for i in cl:
+  f.write(str(i) + "\n")
+f.close()
