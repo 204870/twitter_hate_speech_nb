@@ -23,7 +23,7 @@ while IFS=$'\t' read -r file1line file2line; do
   fi 
 done < <(paste "labels" "cleaned")   
 
-sed "s/[0-9],$//" tdata_cleaner >> tdata_cleaned.csv
+sed "s/[0-9],$//" tdata_cleaner | sort | uniq >> tdata_cleaned.csv
 rm tdata_cleaner
 
 echo "loop 1 done!"
