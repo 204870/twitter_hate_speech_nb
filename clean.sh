@@ -32,3 +32,5 @@ rm nopunc
 cat cleaner | tr -d "\"" | tr -d "!" | tr -d "," | tr -d "@" | tr -d "." >> cleaned
 rm cleaner
 rm tweets
+
+paste "labels" "cleaned" >> tdata_cleaner
