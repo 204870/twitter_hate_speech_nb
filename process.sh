@@ -22,7 +22,7 @@ echo "loop 1 done!"
 
 cat types_temp | sort >> types
 cat types_temp | sort | uniq >> tokens
-rm types_temp
+#rm types_temp
 echo "made files"
 
 # read lines from tokens
