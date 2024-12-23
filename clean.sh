@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python texas.py
+python converter.py
 #makes two files, tweets and labels
 
 # retweet indicators
